@@ -18,7 +18,7 @@ from tensorflow.examples.tutorials.mnist import input_data
 mnist = input_data.read_data_sets("../../../test_data/img_data", one_hot=True)
 
 # 每个批次的大小
-batch_size = 100
+batch_size = 50
 # 计算一共有多少个批次
 n_batch = mnist.train.num_examples // batch_size
 
@@ -177,10 +177,10 @@ with tf.name_scope("fc2"):
 
 with tf.name_scope("cross_entropy"):
     cross_entropy=tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y,logits=fc2_y_conv),name="cross_entropy")
-    tf.summary.scalar("cross_entropy",cross_entropy)
+
 
 with tf.name_scope("train"):
-    train_step=tf.train.GradientDescentOptimizer(1e-4).minimize(cross_entropy)
+    train_step = tf.train.AdamOptimizer(1e-4).minimize(cross_entropy)
 
 # 求准确率
 with tf.name_scope('accuracy'):
@@ -205,7 +205,7 @@ with tf.Session() as sess:
     for i in range(1001):
         # 训练模型
         batch_xs, batch_ys = mnist.train.next_batch(batch_size)
-        sess.run(train_step, feed_dict={x: batch_xs, y: batch_ys, keep_prob: 1})
+        sess.run(train_step, feed_dict={x: batch_xs, y: batch_ys, keep_prob: 0.5})
         # 记录训练集计算的参数
         summary = sess.run(merged, feed_dict={x: batch_xs, y: batch_ys, keep_prob: 1.0})
         train_writer.add_summary(summary, i)
