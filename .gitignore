@@ -5,7 +5,9 @@
 .settings
 .idea/*
 target/*
-testData/*
+test_data/*
+model/*
+model_log/*
 out/*
 *.iml
 *.swp
