@@ -16,12 +16,11 @@
 ## **  修改日期：
 ## **  修改日志：
 import datetime
-
 import tensorflow as tf
 from tensorflow.examples.tutorials.mnist import input_data
 
 #载入数据集
-mnist = input_data.read_data_sets("../examples/tutorials/mnist/data",one_hot=True)
+mnist = input_data.read_data_sets("../../../test_data/img_data", one_hot=True)
 
 #每个批次的大小
 batch_size = 100
